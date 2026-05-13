@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - University Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card animate-fade-in">
+            <div class="auth-logo">🎓 UMS System</div>
+            
+            <!-- Login Form -->
+            <div id="login-section">
+                <h2>Welcome Back</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label class="form-label" for="login-email">Email Address</label>
+                        <input type="email" id="login-email" class="form-control" required placeholder="name@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="login-password">Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="login-password" class="form-control" required placeholder="••••••••">
+                            <span class="toggle-password" data-target="login-password">👁️</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                </form>
+                <div class="auth-switch" style="margin-top: 10px; font-size: 0.8rem; border-top: 1px solid var(--border); padding-top:10px;">
+                    Test accounts:<br>
+                    admin@ums.com / teacher@ums.com / student@ums.com <br> Password: password
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+    
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script>
+        // Handle login form submission
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            try {
+                const response = await fetch('{{ url_for("login") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    AppUI.showToast('Login successful!', 'success');
+                    
+                    // Redirect based on role
+                    setTimeout(() => {
+                        if (data.role === 'admin') {
+                            window.location.href = '{{ url_for("admin_dashboard") }}';
+                        } else if (data.role === 'teacher') {
+                            window.location.href = '{{ url_for("teacher_dashboard") }}';
+                        } else {
+                            window.location.href = '{{ url_for("student_dashboard") }}';
+                        }
+                    }, 500);
+                } else {
+                    AppUI.showToast(data.message || 'Login failed', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                AppUI.showToast('An error occurred', 'error');
+            }
+        });
+        
+        // Password visibility toggle
+        document.querySelectorAll('.toggle-password').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const target = document.getElementById(this.dataset.target);
+                target.type = target.type === 'password' ? 'text' : 'password';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - UMS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body data-user="{{ user | tojson }}">
+
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                🎓 UMS Teacher
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="sidebar-link active" data-target="dashboard-sect">
+                    <span>📚</span> My Courses
+                </a>
+                <a href="#" class="sidebar-link" data-target="marks-sect">
+                    <span>📝</span> Grading & Marks
+                </a>
+                <a href="#" class="sidebar-link" data-target="students-sect">
+                    <span>👥</span> My Students
+                </a>
+                <a href="#" class="sidebar-link" data-target="attendance-sect">
+                    <span>📅</span> Attendance
+                </a>
+            </nav>
+            <div class="sidebar-user">
+                <div class="user-avatar" id="sidebar-user-avatar">T</div>
+                <div style="flex-grow: 1;">
+                    <div style="font-weight: 500;" id="sidebar-user-name">{{ user.name }}</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);" id="sidebar-user-role">Teacher</div>
+                </div>
+                <a href="{{ url_for('logout') }}" class="btn btn-danger" style="padding: 0.5rem;">🚪</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="dashboard-header animate-fade-in">
+                <h2>Teacher Portal</h2>
+                <div style="color: var(--text-muted);" id="current-date"></div>
+            </div>
+
+            <!-- Courses Overview -->
+            <section id="dashboard-sect" class="content-section active">
+                <div class="section-header">
+                    <h3>My Assigned Courses</h3>
+                </div>
+                <div class="stats-grid" id="teacher-courses-grid">
+                    <!-- Cards populated via JS -->
+                </div>
+            </section>
+
+            <!-- Grading Section -->
+            <section id="marks-sect" class="content-section">
+                <div class="section-header">
+                    <h3>Student Grading</h3>
+                    <select id="course-select-marks" class="form-control" style="width: 250px;">
+                        <option value="">Select Course...</option>
+                    </select>
+                </div>
+                <div class="table-container" id="grading-area" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Email</th>
+                                <th>Marks Obtained</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="grading-table-body">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Attendance Section -->
+            <section id="attendance-sect" class="content-section">
+                <div class="section-header">
+                    <h3>Mark Attendance</h3>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="date" id="attendance-date" class="form-control" style="width: auto;">
+                        <select id="course-select-attendance" class="form-control" style="width: 250px;">
+                            <option value="">Select Course...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-container" id="attendance-area" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendance-table-body">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- My Students Section -->
+            <section id="students-sect" class="content-section">
+                <div class="section-header">
+                    <h3>My Students</h3>
+                </div>
+                
+                <div class="stats-grid" style="margin-bottom: 2rem;">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--secondary);">👥</div>
+                        <div class="stat-info">
+                            <h4 id="teacher-dept-name">Department</h4>
+                            <p id="total-dept-students">0</p>
+                            <small class="text-muted">Total Students</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Course / Stream</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dept-students-body">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="toast-container"></div>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/teacher.js') }}"></script>
+</body>
+</html>

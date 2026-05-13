@@ -1,0 +1,144 @@
+<!-- admin_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - UMS</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                🎓 UMS Admin
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="sidebar-link active" data-target="dashboard-sect">
+                    <span>📊</span> Dashboard
+                </a>
+                <a href="#" class="sidebar-link" data-target="users-sect">
+                    <span>👥</span> Manage Users
+                </a>
+                <a href="#" class="sidebar-link" data-target="courses-sect">
+                    <span>📚</span> Manage Courses
+                </a>
+            </nav>
+            <div class="sidebar-user">
+                <div class="user-avatar" id="sidebar-user-avatar">A</div>
+                <div style="flex-grow: 1;">
+                    <div style="font-weight: 500;" id="sidebar-user-name">Admin User</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);" id="sidebar-user-role">Administrator</div>
+                </div>
+                <button class="btn btn-danger" style="padding: 0.5rem;" id="logout-btn">🚪</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="dashboard-header animate-fade-in">
+                <h2>Admin Dashboard</h2>
+                <div style="color: var(--text-muted);" id="current-date"></div>
+            </div>
+
+            <!-- Dashboard Overview Section -->
+            <section id="dashboard-sect" class="content-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <h4>Total Students</h4>
+                            <p id="stat-students">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--secondary);">👨‍🏫</div>
+                        <div class="stat-info">
+                            <h4>Total Teachers</h4>
+                            <p id="stat-teachers">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);">📚</div>
+                        <div class="stat-info">
+                            <h4>Active Courses</h4>
+                            <p id="stat-courses">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="overviewChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users-sect" class="content-section">
+                <div class="section-header">
+                    <h3>Manage Users</h3>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="user-search" class="search-input" placeholder="Search users...">
+                        <button class="btn btn-primary" id="add-user-btn">+ Add User</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Courses Section -->
+            <section id="courses-sect" class="content-section">
+                <div class="section-header">
+                    <h3>Manage Courses</h3>
+                    <button class="btn btn-primary" id="add-course-btn">+ Add Course</button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Credits</th>
+                                <th>Assigned Teacher</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="courses-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modals to be dynamically created or handled via JS alerts/prompts for simplicity, but let's build custom ones -->
+    <!-- Simplified implementation: we can use prompt() or a hidden form. Given requirements, lets create reusable modal CSS and a hidden div -->
+    <div id="custom-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2000; justify-content:center; align-items:center;">
+        <div style="background:var(--bg-card); padding:2rem; border-radius:1rem; width:400px;" id="modal-content-area">
+            <!-- Form inserted here -->
+        </div>
+    </div>
+
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>

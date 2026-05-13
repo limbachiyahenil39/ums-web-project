@@ -1,0 +1,135 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - University Management System</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card animate-fade-in">
+            <div class="auth-logo">🎓 UMS System</div>
+            
+            <!-- Login Form -->
+            <div id="login-section">
+                <h2>Welcome Back</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label class="form-label" for="login-email">Email Address</label>
+                        <input type="email" id="login-email" class="form-control" required placeholder="name@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="login-password">Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="login-password" class="form-control" required placeholder="••••••••">
+                            <span class="toggle-password" data-target="login-password">👁️</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                </form>
+                <div class="auth-switch">
+                    Don't have an account? <a href="#" id="show-signup">Create one</a>
+                </div>
+                <div class="auth-switch" style="margin-top: 10px; font-size: 0.8rem; border-top: 1px solid var(--border); padding-top:10px;">
+                    Test accounts:<br>
+                    admin@ums.com / teacher@ums.com / student@ums.com <br> Password: password
+                </div>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-section" style="display: none;">
+                <h2>Create Account</h2>
+                <form id="signup-form-el">
+                    <div class="form-group">
+                        <label class="form-label" for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" class="form-control" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" class="form-control" required placeholder="name@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="signup-password">Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="signup-password" class="form-control" required minlength="6" placeholder="••••••••">
+                            <span class="toggle-password" data-target="signup-password">👁️</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="signup-role">I am a</label>
+                        <select id="signup-role" class="form-control" required>
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="signup-department">Select Course / Stream</label>
+                        <select id="signup-department" class="form-control" required>
+                            <option value="">Choose...</option>
+                            <optgroup label="Undergraduate Programs (UG)">
+                                <option value="B.Tech - Computer Science & Engineering (Co-Op)">B.Tech - Computer Science & Engineering (Co-Op)</option>
+                                <option value="B.Tech - Civil Engineering">B.Tech - Civil Engineering</option>
+                                <option value="B.Tech - Electrical & Electronics Engineering">B.Tech - Electrical & Electronics Engineering</option>
+                                <option value="B.Tech - Mechanical Engineering">B.Tech - Mechanical Engineering</option>
+                                <option value="BSc - Microbiology">BSc - Microbiology</option>
+                                <option value="BSc - Chemistry">BSc - Chemistry</option>
+                                <option value="BSc - Botany & Plant Biotechnology">BSc - Botany & Plant Biotechnology</option>
+                                <option value="BSc - Zoology & Animal Biotechnology">BSc - Zoology & Animal Biotechnology</option>
+                                <option value="BSc - Data Science">BSc - Data Science</option>
+                                <option value="BBA">BBA</option>
+                                <option value="BBA-LLB">BBA-LLB</option>
+                                <option value="BA in Journalism & Mass Communication">BA in Journalism & Mass Communication</option>
+                                <option value="B.Arch">B.Arch</option>
+                                <option value="BCA">BCA</option>
+                            </optgroup>
+                            <optgroup label="Postgraduate Programs (PG)">
+                                <option value="M.Sc - Organic Chemistry">M.Sc - Organic Chemistry</option>
+                                <option value="M.Sc - Analytical Chemistry">M.Sc - Analytical Chemistry</option>
+                                <option value="M.Sc - Clinical Embryology">M.Sc - Clinical Embryology</option>
+                                <option value="M.Sc - Microbiology">M.Sc - Microbiology</option>
+                                <option value="M.Sc - Botany & Biotechnology">M.Sc - Botany & Biotechnology</option>
+                                <option value="M.Sc - Computer Science">M.Sc - Computer Science</option>
+                                <option value="M.Sc - Pharmaceutical Chemistry">M.Sc - Pharmaceutical Chemistry</option>
+                                <option value="Integrated BSc-MSc Biomedical Science">Integrated BSc-MSc Biomedical Science</option>
+                                <option value="MBA (Marketing, HR, Finance, Operations)">MBA (Marketing, HR, Finance, Operations)</option>
+                                <option value="LLM (Corporate & Commercial Laws)">LLM (Corporate & Commercial Laws)</option>
+                                <option value="M.Tech">M.Tech</option>
+                                <option value="MSW">MSW</option>
+                                <option value="M.Ed">M.Ed</option>
+                            </optgroup>
+                            <optgroup label="Integrated Programs">
+                                <option value="Integrated BTech-MBA-MSc (Computer Science)">Integrated BTech-MBA-MSc (Computer Science)</option>
+                                <option value="Integrated BSc-MSc (Biomedical Science)">Integrated BSc-MSc (Biomedical Science)</option>
+                            </optgroup>
+                            <optgroup label="PhD & Diploma">
+                                <option value="PhD (Management)">PhD (Management)</option>
+                                <option value="PhD (Engineering)">PhD (Engineering)</option>
+                                <option value="PhD (Sciences)">PhD (Sciences)</option>
+                                <option value="PhD (Education)">PhD (Education)</option>
+                                <option value="PhD (Journalism)">PhD (Journalism)</option>
+                                <option value="PhD (Law)">PhD (Law)</option>
+                                <option value="PG Diploma in Business Analytics">PG Diploma in Business Analytics</option>
+                                <option value="Diploma in Bioinformatics">Diploma in Bioinformatics</option>
+                                <option value="Diploma in Business and Corporate Law">Diploma in Business and Corporate Law</option>
+                                <option value="Certificate in Machine Learning & AI">Certificate in Machine Learning & AI</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                </form>
+                <div class="auth-switch">
+                    Already have an account? <a href="#" id="show-login">Sign In</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/auth.js"></script>
+</body>
+</html>
